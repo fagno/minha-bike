@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +18,11 @@ public class BikeCadastroActivity extends AppCompatActivity {
 
     Spinner tiposBikes,marcasBike;
     ArrayAdapter adapter;
+
+
+    //Cadastro da Bicicleta
+    TextView modelo;
+    EditText peso, notas;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +33,11 @@ public class BikeCadastroActivity extends AppCompatActivity {
 
         tiposBikes = findViewById(R.id.spinnerTipoBike);
         marcasBike  = findViewById(R.id.spinnerMarcaBike);
+
+        //Atribuindo ID do cadastro
+        modelo = findViewById(R.id.idBikeModelo);
+        peso = findViewById(R.id.idBikePeso);
+        notas = findViewById(R.id.editTextTextMultiLine);
 
         final List<String> tipos = new ArrayList<>();
         tipos.add("Bicicleta BMX");
@@ -71,5 +84,9 @@ public class BikeCadastroActivity extends AppCompatActivity {
                 break;
         }
         return true;
+    }
+
+    public void cadastarBicicleta(View view) {
+
     }
 }

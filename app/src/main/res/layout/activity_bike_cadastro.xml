@@ -151,6 +151,7 @@
         android:layout_marginTop="40dp"
         android:background="@drawable/botao"
         android:text="Salvar Bicicleta"
+        android:onClick="cadastarBicicleta"
         android:textSize="20sp" />
 
 </LinearLayout>
