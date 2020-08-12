@@ -3,6 +3,16 @@ Projeto da Disciplina de Programação para Dispositivos Móveis I
 
 O presente projeto tem como objetivo desenvolver um aplicativo para controlar e monitorar manutenções preventivas e custo com sua bike, com o objetivo de reduzir ou impedir falhas no desempenho da mesma.
 
+## Adicionar o arquivo de configuração do Firebase - [Adicionar o Firebase ao projeto para Android](https://firebase.google.com/docs/android/setup?authuser=0)
+
+1. Criar seu projeto do Firebase - [Noções básicas sobre projetos do Firebase.](https://firebase.google.com/docs/projects/learn-more?authuser=0);
+2. Registrar seu app com o Firebase;
+3. Adicionar o arquivo de configuração do Firebase para Android no app, siga estas etapas:
+
+- Clique em Fazer o download do `google-services.json` para receber o arquivo de configuração do Firebase para Android (google-services.json).
+
+- É possível fazer o download do arquivo de configuração do Firebase para Android novamente a qualquer momento. Mude para a visualização do Projeto no Android Studio para ver o diretório raiz e mova seu arquivo de configuração para o diretório (nível do app) do seu aplicativo. 
+
 ## Deseja contribuir?
 
 Contribuições são sempre bem vindas. Você pode contribuir de diferentes formas, disponvel a seguir. No entanto, existem algumas diretrizes que precisamos que os colaboradores sigam. 
