@@ -25,15 +25,16 @@ public class ServicoCadastroActivity extends AppCompatActivity {
     DatabaseReference database = FirebaseDatabase.getInstance().getReference();
     ArrayAdapter adapter;
     Spinner servico;
-    EditText valor,descricao;
+    EditText valor,descricao,bikeServico;
     TextInputEditText data,acessorio,componente,km;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_servico_cadastro);
-        getSupportActionBar().setTitle("Cadastro Serviço");
+        getSupportActionBar().setTitle("Cadastro de Serviço");
 
+        Intent intent =getIntent();
         servico = findViewById(R.id.spinnerTipoServico);
         data = findViewById(R.id.idData);
         acessorio = findViewById(R.id.idAcessorio);
@@ -41,6 +42,8 @@ public class ServicoCadastroActivity extends AppCompatActivity {
         km = findViewById(R.id.idKmAtual);
         valor = findViewById(R.id.idValor);
         descricao = findViewById(R.id.idDescricao);
+        bikeServico = findViewById(R.id.idBikeServico);
+        bikeServico.setText(intent.getStringExtra("modeloBike"));
 
         final List<String> servicos = new ArrayList<>();
         servicos.add("Lavagem da Bicicleta");
@@ -79,6 +82,7 @@ public class ServicoCadastroActivity extends AppCompatActivity {
 
     public void cadastarServico(View view) {
         Servico s = new Servico();
+        s.setBikeServico(bikeServico.getText().toString());
         s.setTipo(servico.getSelectedItem().toString());
         s.setAcessorio(acessorio.getText().toString());
         s.setComponenteTroca(componente.getText().toString());

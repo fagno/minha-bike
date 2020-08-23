@@ -2,6 +2,7 @@ package br.edu.ifto.minhabike.entity;
 
 public class Servico {
 
+    private String bikeServico;
     private String tipo;
     private String componenteTroca;
     private String acessorio;
@@ -13,8 +14,9 @@ public class Servico {
     public Servico() {
     }
 
-    public Servico(String tipo, String componenteTroca, String acessorio, String descricao,
+    public Servico(String bikeServico ,String tipo, String componenteTroca, String acessorio, String descricao,
                    String kmAtual, String data, String valor) {
+        this.bikeServico =bikeServico;
         this.tipo = tipo;
         this.componenteTroca = componenteTroca;
         this.acessorio = acessorio;
@@ -23,6 +25,10 @@ public class Servico {
         this.data = data;
         this.valor = valor;
     }
+
+    public String getBikeServico() { return bikeServico; }
+
+    public void setBikeServico(String bikeServico) { this.bikeServico = bikeServico; }
 
     public String getTipo() {
         return tipo;
@@ -77,4 +83,6 @@ public class Servico {
     public void setValor(String valor) {
         this.valor = valor;
     }
+
+
 }

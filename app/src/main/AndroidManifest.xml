@@ -11,7 +11,6 @@
         android:theme="@style/AppTheme">
         <activity android:name=".CadastroUsuarioActivity"></activity>
         <activity android:name=".UsuarioActivity">
-
         </activity>
         <activity android:name=".ServicoCadastroActivity" >
         </activity>

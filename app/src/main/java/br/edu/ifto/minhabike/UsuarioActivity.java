@@ -39,7 +39,7 @@ public class UsuarioActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_usuario);
-
+        getSupportActionBar().setTitle("Login");
 
         email = findViewById(R.id.idLoginEmail);
         pass = findViewById(R.id.idLoginSenha);

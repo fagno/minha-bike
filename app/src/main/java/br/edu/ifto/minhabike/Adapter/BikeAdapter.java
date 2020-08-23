@@ -72,6 +72,7 @@ public class BikeAdapter extends RecyclerView.Adapter<BikeAdapter.MyViewHolder> 
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), ServicoCadastroActivity.class);
+                intent.putExtra("modeloBike",bicicletaArrayList.get(position).getModelo());
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 view.getContext().startActivity(intent);
             }

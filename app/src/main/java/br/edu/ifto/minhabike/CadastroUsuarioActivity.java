@@ -32,6 +32,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cadastro_usuario);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setTitle("Cadastrar Usuario");
 
         user = findViewById(R.id.idCadastroUsuario);
         email = findViewById(R.id.idCadastroEmail);
