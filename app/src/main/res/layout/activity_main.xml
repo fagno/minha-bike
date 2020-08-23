@@ -8,7 +8,7 @@
     tools:context=".MainActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/rcViewMain"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/backgoundApp"
@@ -21,10 +21,10 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
-        android:layout_width="42dp"
-        android:layout_height="43dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="16dp"
         android:clickable="false"
         android:onClick="acaoAddBike"
         android:tint="#FFFDFD"

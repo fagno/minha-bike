@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:padding="30dp"
     android:orientation="vertical"
-    tools:context=".UsuarioActivity">
+    tools:context=".CadastroUsuarioActivity">
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -17,7 +17,24 @@
         android:textColorHint="#E64A19">
 
         <EditText
-            android:id="@+id/idLoginEmail"
+            android:id="@+id/idCadastroUsuario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Usuario"
+            android:inputType="text"
+            android:textSize="20sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:textColorHint="#E64A19">
+
+        <EditText
+            android:id="@+id/idCadastroEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -34,7 +51,7 @@
         android:textColorHint="#E64A19">
 
         <EditText
-            android:id="@+id/idLoginSenha"
+            android:id="@+id/idCadastroSenha"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -48,24 +65,9 @@
         android:layout_height="60dp"
         android:layout_marginTop="40dp"
         android:background="@drawable/botao"
-        android:onClick="autenticar"
-        android:text="Entrar"
+        android:onClick="cadastrarUsuario"
+        android:text="Cadastrar"
         android:textSize="20sp" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="357dp"
-            android:layout_height="wrap_content"
-            android:onClick="cadastarUsuario"
-            android:text="Cadastrar Usuario"
-            android:textAlignment="center"
-            android:textColor="#E64A19"
-            android:textSize="20sp" />
-    </LinearLayout>
 
 </LinearLayout>

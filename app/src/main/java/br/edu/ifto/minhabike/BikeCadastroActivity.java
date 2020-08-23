@@ -11,10 +11,17 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import br.edu.ifto.minhabike.entity.Bicicleta;
+
 public class BikeCadastroActivity extends AppCompatActivity {
+
+    DatabaseReference database = FirebaseDatabase.getInstance().getReference();
 
     Spinner tiposBikes,marcasBike;
     ArrayAdapter adapter;
@@ -33,7 +40,6 @@ public class BikeCadastroActivity extends AppCompatActivity {
 
         tiposBikes = findViewById(R.id.spinnerTipoBike);
         marcasBike  = findViewById(R.id.spinnerMarcaBike);
-
         //Atribuindo ID do cadastro
         modelo = findViewById(R.id.idBikeModelo);
         peso = findViewById(R.id.idBikePeso);
@@ -87,6 +93,18 @@ public class BikeCadastroActivity extends AppCompatActivity {
     }
 
     public void cadastarBicicleta(View view) {
+        Bicicleta bicicleta = new Bicicleta();
+        bicicleta.setMarca(marcasBike.getSelectedItem().toString());
+        bicicleta.setModelo(modelo.getText().toString());
+        bicicleta.setTipo(tiposBikes.getSelectedItem().toString());
+        bicicleta.setPeso(Float.valueOf(peso.getText().toString()));
+        bicicleta.setNotas(notas.getText().toString());
 
+        DatabaseReference bikes = database.child("bicicleta");
+        bikes.push().setValue(bicicleta);
+
+        Intent intent = new Intent(this,MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 }

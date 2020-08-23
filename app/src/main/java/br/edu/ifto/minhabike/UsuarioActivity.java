@@ -1,10 +1,16 @@
 package br.edu.ifto.minhabike;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -26,44 +32,42 @@ public class UsuarioActivity extends AppCompatActivity {
      * Objeto para manipular ações com usuários
      */
     private FirebaseAuth usuario = FirebaseAuth.getInstance();
+    private TextView email, pass;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_usuario);
 
-        Usuario u = new Usuario();
-        u.setEmail("usuario@gmail.com");
-        u.setSenha("123jks");
+
+        email = findViewById(R.id.idLoginEmail);
+        pass = findViewById(R.id.idLoginSenha);
+
 
         //cadastrar(u);
-        autenticado();
+        //autenticado();
         //autenticar(u);
     }
 
-    /**
-     * Cadastrar usuário
-     */
-    public void cadastrar(Usuario u) {
-        usuario.createUserWithEmailAndPassword(u.getEmail(), u.getSenha())
-                .addOnCompleteListener(UsuarioActivity.this, new OnCompleteListener<AuthResult>() {
-                    /**
-                     *
-                     * @param task objeto de retorno do firebase
-                     */
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            Log.i("NOVO", "Usuário cadastrado!");
-                        } else {
-                            Log.i("NOVO", "Usuário não cadastrado!");
-                        }
-                    }
-                });
+    public void autenticar(View view) {
+        Usuario u = new Usuario();
+        u.setEmail(email.getText().toString());
+        u.setSenha(pass.getText().toString());
+        if (u.getEmail().equals("") || u.getSenha().equals("")){
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
+            builder1.setMessage("Preencha Todos os Campos !!!");
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
+        }else{
+            autenticar(u);
+        }
+
     }
 
     /**
      * Autenticar usuário
+     *
      * @param u
      * @return
      */
@@ -77,11 +81,21 @@ public class UsuarioActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Log.i("LOGIN", "Login efetuado!");
+                            Intent intent = new Intent(getActivity(), MainActivity.class);
+                            startActivity(intent);
                         } else {
                             Log.i("LOGIN", "Dados do usuário inválido!!");
+                            AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
+                            builder1.setMessage("Dados do usuário inválido!!");
+                            AlertDialog alert11 = builder1.create();
+                            alert11.show();
                         }
                     }
                 });
+    }
+
+    public Context getActivity() {
+        return this;
     }
 
     public void autenticado() {
@@ -94,5 +108,12 @@ public class UsuarioActivity extends AppCompatActivity {
     public void logout() {
         usuario.signOut();
     }
+
+    public void cadastarUsuario(View view) {
+        Intent intent = new Intent(this, CadastroUsuarioActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
 
 }

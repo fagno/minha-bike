@@ -1,4 +1,4 @@
-package br.edu.ifto.minhabike;
+package br.edu.ifto.minhabike.entity;
 
 public class Bicicleta {
     private  int id;
@@ -7,6 +7,18 @@ public class Bicicleta {
     private String tipo;
     private float peso;
     private String notas;
+
+    public Bicicleta() {
+    }
+
+    public Bicicleta(int id, String modelo, String marca, String tipo, float peso, String notas) {
+        this.id = id;
+        this.modelo = modelo;
+        this.marca = marca;
+        this.tipo = tipo;
+        this.peso = peso;
+        this.notas = notas;
+    }
 
     public int getId() {
         return id;
