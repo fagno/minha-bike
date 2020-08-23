@@ -5,14 +5,28 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
+
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+
+import br.edu.ifto.minhabike.entity.Servico;
 
 public class ServicoCadastroActivity extends AppCompatActivity {
 
     ArrayAdapter adapter;
     Spinner servico;
+    EditText componenteTroca,acessorio,descricao,kmAtual,valor;
+
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +34,12 @@ public class ServicoCadastroActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Cadastro Serviço");
 
         servico = findViewById(R.id.spinnerTipoServico);
+
+        componenteTroca = (EditText) findViewById(R.id.idComponenteTroca);
+        acessorio = (EditText) findViewById(R.id.idAcessorio);
+        descricao = (EditText) findViewById(R.id.idDescricao);
+        kmAtual = (EditText) findViewById(R.id.idKmAtual);
+        valor = (EditText) findViewById(R.id.idValor);
 
         final List<String> servicos = new ArrayList<>();
         servicos.add("Lavagem da Bicicleta");
@@ -51,8 +71,30 @@ public class ServicoCadastroActivity extends AppCompatActivity {
         adapter = new ArrayAdapter(this,R.layout.spinner_item, servicos);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         servico.setAdapter(adapter);
+
+
     }
 
-    public void cadastarServico(View view) {
+    private void inicializarFirebase(){
+        FirebaseApp.initializeApp(ServicoCadastroActivity.this);
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
     }
+
+    public void cadastrarServico(View view) {
+
+        Servico s = new Servico();
+        s.setId(UUID.randomUUID().toString());
+        s.setTipo_servico(servico.getSelectedItem().toString());
+        s.setConponente_troca(componenteTroca.getText().toString());
+        s.setAcessorio(acessorio.getText().toString());
+        s.setDescricao(descricao.getText().toString());
+        s.setKm_atual(kmAtual.getText().toString());
+        s.setValor(valor.getText().toString());
+        databaseReference.child("Servico").child(s.getId()).setValue(s);
+
+    }
+
+
 }
+

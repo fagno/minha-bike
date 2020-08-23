@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void acaoAddBike(View view) {
-        Intent intent = new Intent(this, BikeCadastroActivity.class);
+        Intent intent = new Intent(this, ServicoCadastroActivity.class);
         startActivity(intent);
     }
 }
