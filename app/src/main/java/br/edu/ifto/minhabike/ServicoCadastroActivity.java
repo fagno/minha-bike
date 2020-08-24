@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -19,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class ServicoCadastroActivity extends AppCompatActivity {
 
@@ -27,6 +29,8 @@ public class ServicoCadastroActivity extends AppCompatActivity {
     Spinner servico;
     EditText valor,descricao,bikeServico;
     TextInputEditText data,acessorio,componente,km;
+    Button cadastro,atualizar;
+    String uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +47,26 @@ public class ServicoCadastroActivity extends AppCompatActivity {
         valor = findViewById(R.id.idValor);
         descricao = findViewById(R.id.idDescricao);
         bikeServico = findViewById(R.id.idBikeServico);
+        cadastro = findViewById(R.id.btnCadastroServico);
+        atualizar = findViewById(R.id.btnAtualizarServico);
         bikeServico.setText(intent.getStringExtra("modeloBike"));
+
+//
+//
+//    if(intent.getStringExtra("servicoBike")!=null){
+//        servico.getSelectedItem().toString(intent.getStringExtra("servicoTipo"));
+//        data.setText(intent.getStringExtra("servicoData"));
+//        acessorio.setText(intent.getStringExtra("servicoAcessorio"));
+//        componente.setText(intent.getStringExtra("servicoComponente"));
+//        km.setText(intent.getStringExtra("servicoKm"));
+//        descricao.setText(intent.getStringExtra("servicoDescricao"));
+//        valor.setText(intent.getStringExtra("servicoValor"));
+//        bikeServico.setText(intent.getStringExtra("servicoBike"));
+//        uid = intent.getStringExtra("sevicoUid");
+//        cadastro.setVisibility(View.GONE);
+//        atualizar.setVisibility(View.VISIBLE);
+//    }
+
 
         final List<String> servicos = new ArrayList<>();
         servicos.add("Lavagem da Bicicleta");
@@ -89,14 +112,34 @@ public class ServicoCadastroActivity extends AppCompatActivity {
         s.setData(data.getText().toString());
         s.setDescricao(descricao.getText().toString());
         s.setKmAtual(km.getText().toString());
-        s.setValor(valor.getText().toString());
+        s.setValor("R$ "+valor.getText().toString());
 
         DatabaseReference servicos = database.child("servico");
         servicos.push().setValue(s);
 
-        Intent intent = new Intent(this,MainActivity.class);
+        Intent intent = new Intent(this,ConsultaServicoActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
 
+    }
+
+    public void acaoAtualizar(View view) {
+//        Servico s = new Servico();
+//        s.setBikeServico(bikeServico.getText().toString());
+//        s.setTipo(servico.getSelectedItem().toString());
+//        s.setAcessorio(acessorio.getText().toString());
+//        s.setComponenteTroca(componente.getText().toString());
+//        s.setData(data.getText().toString());
+//        s.setDescricao(descricao.getText().toString());
+//        s.setKmAtual(km.getText().toString());
+//        s.setValor("R$ "+valor.getText().toString());
+//
+//        DatabaseReference servicos = database.child("servico");
+//        servicos.child("bikeServico").child(uid).removeValue();
+//        servicos.push().setValue(s);
+//
+//        Intent intent = new Intent(this,MainActivity.class);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//        startActivity(intent);
     }
 }

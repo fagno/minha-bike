@@ -44,10 +44,6 @@ public class UsuarioActivity extends AppCompatActivity {
         email = findViewById(R.id.idLoginEmail);
         pass = findViewById(R.id.idLoginSenha);
 
-
-        //cadastrar(u);
-        //autenticado();
-        //autenticar(u);
     }
 
     public void autenticar(View view) {

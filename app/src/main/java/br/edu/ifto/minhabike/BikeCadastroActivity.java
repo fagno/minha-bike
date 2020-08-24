@@ -10,7 +10,6 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -72,6 +71,7 @@ public class BikeCadastroActivity extends AppCompatActivity {
         marcas.add("XKS");
         marcas.add("Benoá");
 
+
         adapter = new ArrayAdapter(this,R.layout.spinner_item, tipos);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         tiposBikes.setAdapter(adapter);
@@ -79,6 +79,7 @@ public class BikeCadastroActivity extends AppCompatActivity {
         adapter = new ArrayAdapter(this,R.layout.spinner_item, marcas);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         marcasBike.setAdapter(adapter);
+
     }
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

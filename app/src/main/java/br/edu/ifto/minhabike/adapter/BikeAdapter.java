@@ -1,30 +1,22 @@
-package br.edu.ifto.minhabike.Adapter;
+package br.edu.ifto.minhabike.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
-
-import br.edu.ifto.minhabike.MainActivity;
+import br.edu.ifto.minhabike.ConsultaServicoActivity;
 import br.edu.ifto.minhabike.R;
 import br.edu.ifto.minhabike.ServicoCadastroActivity;
 import br.edu.ifto.minhabike.entity.Bicicleta;
@@ -39,6 +31,7 @@ public class BikeAdapter extends RecyclerView.Adapter<BikeAdapter.MyViewHolder> 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView txtmodelo, txtmarca, txttipo;
         LinearLayout addServico, verServicos, excluirBike;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             txtmodelo = itemView.findViewById(R.id.idCardModelo);
@@ -71,16 +64,32 @@ public class BikeAdapter extends RecyclerView.Adapter<BikeAdapter.MyViewHolder> 
         holder.addServico.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Intent intent = new Intent(view.getContext(), ServicoCadastroActivity.class);
-                intent.putExtra("modeloBike",bicicletaArrayList.get(position).getModelo());
+                intent.putExtra("modeloBike", bicicletaArrayList.get(position).getModelo());
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 view.getContext().startActivity(intent);
             }
         });
+        //dados da bicicleta para activity de Consulta de serviços
+        holder.verServicos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), ConsultaServicoActivity.class);
+                intent.putExtra("modeloBike", bicicletaArrayList.get(position).getModelo());
+                intent.putExtra("tipoBike", bicicletaArrayList.get(position).getTipo());
+                intent.putExtra("marcaBike", bicicletaArrayList.get(position).getMarca());
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                view.getContext().startActivity(intent);
+            }
+        });
+
+//        Excluir Bicicleta Selecionada
         holder.excluirBike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
-                Query apagar = database.child("bicicleta").orderByChild("modelo").equalTo(bicicletaArrayList.get(position).getModelo());
+                Query apagar = database.child("bicicleta").orderByChild("modelo")
+                        .equalTo(bicicletaArrayList.get(position).getModelo());
                 apagar.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

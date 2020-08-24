@@ -137,25 +137,6 @@
 
     </LinearLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="168dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:textColorHint="#E64A19">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/idData"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Data"
-            android:inputType="date"
-            android:textSize="20sp" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -181,25 +162,42 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="wrap_content"
+            android:layout_width="168dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:textColorHint="#E64A19">
 
-            <EditText
-                android:id="@+id/idValor"
-                android:layout_width="145dp"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/idData"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Valor"
-                android:inputType="numberSigned|numberDecimal"
+                android:hint="Data"
+                android:inputType="date"
                 android:textSize="20sp" />
+
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColorHint="#E64A19">
+
+        <EditText
+            android:id="@+id/idValor"
+            android:layout_width="145dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Valor"
+            android:inputType="numberSigned|numberDecimal"
+            android:textSize="20sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
     <Button
+        android:id="@+id/btnCadastroServico"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginTop="40dp"
@@ -207,5 +205,15 @@
         android:onClick="cadastarServico"
         android:text="Salvar Serviço"
         android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/btnAtualizarServico"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/botao"
+        android:onClick="acaoAtualizar"
+        android:text="Atualizar"
+        android:textSize="20sp"
+        android:visibility="gone" />
 
 </LinearLayout>

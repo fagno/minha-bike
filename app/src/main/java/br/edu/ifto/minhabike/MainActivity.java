@@ -18,7 +18,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-import br.edu.ifto.minhabike.Adapter.BikeAdapter;
+import br.edu.ifto.minhabike.adapter.BikeAdapter;
 import br.edu.ifto.minhabike.entity.Bicicleta;
 
 public class MainActivity extends AppCompatActivity {
@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.rcViewMain);
         recyclerView.setLayoutManager( new LinearLayoutManager(this));
 
+        //Buscando Lista de Bicicletas Cadastradas
         bicicletaArrayList = new ArrayList<>();
         database.child("bicicleta").addValueEventListener(new ValueEventListener() {
             @Override
@@ -45,12 +46,10 @@ public class MainActivity extends AppCompatActivity {
                 for (DataSnapshot dado : dataSnapshot.getChildren()){
                     Bicicleta b =dado.getValue(Bicicleta.class);
                     bicicletaArrayList.add(b);
-
                 }
                     mAdapter = new BikeAdapter(getApplicationContext(),bicicletaArrayList);
                     recyclerView.setAdapter(mAdapter);
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
