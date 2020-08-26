@@ -66,6 +66,7 @@ public class BikeAdapter extends BaseAdapter {
         ((TextView) convertView.findViewById(R.id.idCardModelo)).setText(bike.getModelo());
         ((TextView) convertView.findViewById(R.id.idCardMarca)).setText(bike.getMarca());
         ((TextView) convertView.findViewById(R.id.idCardTipo)).setText(bike.getTipo());
+
         ((LinearLayout) convertView.findViewById(R.id.idAddSevico)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,6 +76,7 @@ public class BikeAdapter extends BaseAdapter {
                 view.getContext().startActivity(intent);
             }
         });
+
         ((LinearLayout) convertView.findViewById(R.id.idVerServicos)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,6 +88,7 @@ public class BikeAdapter extends BaseAdapter {
                 view.getContext().startActivity(intent);
             }
         });
+//        funcao para Excluir Bicicleta
         ((LinearLayout) convertView.findViewById(R.id.idExcluirBike)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
