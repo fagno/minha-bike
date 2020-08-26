@@ -14,7 +14,8 @@
         android:layout_marginTop="60dp"
         android:focusable="true"
         android:focusableInTouchMode="true"
-        android:textColorHint="#E64A19">
+        android:textColorHint="#E64A19"
+        app:hintTextAppearance="@style/TextAppearance.AppCompat.Medium">
 
         <EditText
             android:id="@+id/idCadastroUsuario"
@@ -31,7 +32,8 @@
         android:layout_height="wrap_content"
         android:focusable="true"
         android:focusableInTouchMode="true"
-        android:textColorHint="#E64A19">
+        android:textColorHint="#E64A19"
+        app:hintTextAppearance="@style/TextAppearance.AppCompat.Medium">
 
         <EditText
             android:id="@+id/idCadastroEmail"
@@ -42,13 +44,15 @@
             android:inputType="textEmailAddress"
             android:textSize="20sp" />
     </com.google.android.material.textfield.TextInputLayout>
+
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:focusable="true"
         android:focusableInTouchMode="true"
-        android:textColorHint="#E64A19">
+        android:textColorHint="#E64A19"
+        app:hintTextAppearance="@style/TextAppearance.AppCompat.Medium">
 
         <EditText
             android:id="@+id/idCadastroSenha"

@@ -33,21 +33,24 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Modelo :"
-                    android:textColor="#E64A19" />
+                    android:textColor="#E64A19"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/textView9"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Data"
-                    android:textColor="#E64A19" />
+                    android:text="Data :"
+                    android:textColor="#E64A19"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/textView8"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Tipo :"
-                    android:textColor="#E64A19" />
+                    android:textColor="#E64A19"
+                    android:textSize="16sp" />
 
             </LinearLayout>
 
@@ -62,21 +65,24 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Pressure 2019/2020"
-                    android:textColor="#000000" />
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/idCardServicoMarca"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="RAVA"
-                    android:textColor="#000000" />
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/idCardServicoTipo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Bicicleta TT"
-                    android:textColor="#000000" />
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
 
             </LinearLayout>
 

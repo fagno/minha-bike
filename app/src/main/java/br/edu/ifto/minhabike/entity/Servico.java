@@ -1,11 +1,13 @@
 package br.edu.ifto.minhabike.entity;
 
+import android.icu.util.LocaleData;
+
+import java.time.LocalDate;
+
 public class Servico {
 
     private String bikeServico;
     private String tipo;
-    private String componenteTroca;
-    private String acessorio;
     private String descricao;
     private String kmAtual;
     private String data;
@@ -14,12 +16,10 @@ public class Servico {
     public Servico() {
     }
 
-    public Servico(String bikeServico ,String tipo, String componenteTroca, String acessorio, String descricao,
+    public Servico(String bikeServico ,String tipo,  String descricao,
                    String kmAtual, String data, String valor) {
         this.bikeServico =bikeServico;
         this.tipo = tipo;
-        this.componenteTroca = componenteTroca;
-        this.acessorio = acessorio;
         this.descricao = descricao;
         this.kmAtual = kmAtual;
         this.data = data;
@@ -36,20 +36,6 @@ public class Servico {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
-    }
-
-    public String getComponenteTroca() {
-        return componenteTroca;
-    }
-
-    public void setComponenteTroca(String componenteTroca) { this.componenteTroca = componenteTroca; }
-
-    public String getAcessorio() {
-        return acessorio;
-    }
-
-    public void setAcessorio(String acessorio) {
-        this.acessorio = acessorio;
     }
 
     public String getDescricao() {

@@ -11,16 +11,14 @@
         android:theme="@style/AppTheme">
         <activity android:name=".ConsultaServicoActivity"></activity>
         <activity android:name=".CadastroUsuarioActivity" />
-        <activity android:name=".UsuarioActivity"></activity>
-        <activity android:name=".ServicoCadastroActivity"></activity>
-        <activity android:name=".BikeCadastroActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".UsuarioActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ServicoCadastroActivity"></activity>
+        <activity android:name=".BikeCadastroActivity" />
+        <activity android:name=".MainActivity"></activity>
     </application>
-
 </manifest>

@@ -1,12 +1,14 @@
 package br.edu.ifto.minhabike;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -60,6 +62,7 @@ public class ConsultaServicoActivity extends AppCompatActivity {
         servicosArrayList = new ArrayList<>();
         database.child("servico").orderByChild("bikeServico").equalTo(bikeModelo.getText().toString())
                 .addValueEventListener(new ValueEventListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.O)
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         servicosArrayList.clear();

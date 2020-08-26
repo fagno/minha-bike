@@ -1,6 +1,7 @@
 package br.edu.ifto.minhabike.adapter;
 
 import android.content.Context;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,20 +9,24 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import br.edu.ifto.minhabike.R;
 import br.edu.ifto.minhabike.entity.Servico;
 
+@RequiresApi(api = Build.VERSION_CODES.O)
 public class ServicosAdapter extends RecyclerView.Adapter<ServicosAdapter.MyViewHolder> {
 
     DatabaseReference database = FirebaseDatabase.getInstance().getReference();
-
+    DateTimeFormatter formatterData = DateTimeFormatter.ofPattern("dd/MM/uuuu");
     ArrayList<Servico> servicosArrayList;
     Context context;
 
@@ -31,16 +36,14 @@ public class ServicosAdapter extends RecyclerView.Adapter<ServicosAdapter.MyView
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView txtServico,txtData,txtAcessorio,txtcomponente,txtKm,txtValor,txtDescricao;
+        TextView txtServico,txtData,txtKm,txtValor,txtDescricao;
         ImageView imgEditar;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             txtServico = itemView.findViewById(R.id.idCardServicoServico);
             txtData = itemView.findViewById(R.id.idCardServicoData);
-            txtcomponente = itemView.findViewById(R.id.idCardServicoComponente);
             txtKm = itemView.findViewById(R.id.idCardServicoKm);
             txtValor = itemView.findViewById(R.id.idCardServicoValor);
-            txtAcessorio = itemView.findViewById(R.id.idCardServicoAcessorio);
             txtDescricao = itemView.findViewById(R.id.idCardServicoDescricao);
             imgEditar = itemView.findViewById(R.id.imgEditarServico);
         }
@@ -57,9 +60,7 @@ public class ServicosAdapter extends RecyclerView.Adapter<ServicosAdapter.MyView
     @Override
     public void onBindViewHolder(@NonNull ServicosAdapter.MyViewHolder holder, final int position) {
         holder.txtServico.setText(servicosArrayList.get(position).getTipo());
-        holder.txtAcessorio.setText(servicosArrayList.get(position).getAcessorio());
-        holder.txtcomponente.setText(servicosArrayList.get(position).getComponenteTroca());
-        holder.txtData.setText(servicosArrayList.get(position).getData());
+        holder.txtData.setText(String.valueOf(servicosArrayList.get(position).getData()));
         holder.txtDescricao.setText(servicosArrayList.get(position).getDescricao());
         holder.txtKm.setText(servicosArrayList.get(position).getKmAtual());
         holder.txtValor.setText(servicosArrayList.get(position).getValor());

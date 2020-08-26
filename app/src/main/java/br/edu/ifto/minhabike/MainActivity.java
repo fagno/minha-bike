@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ListView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
     DatabaseReference database = FirebaseDatabase.getInstance().getReference();
 
-    RecyclerView recyclerView;
+    ListView listView;
     BikeAdapter mAdapter;
     ArrayList<Bicicleta> bicicletaArrayList;
     @Override
@@ -34,9 +35,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getSupportActionBar().setTitle("Minha Bike");
 
-        recyclerView = (RecyclerView) findViewById(R.id.rcViewMain);
-        recyclerView.setLayoutManager( new LinearLayoutManager(this));
-
+        listView =  findViewById(R.id.ltViewMain);
         //Buscando Lista de Bicicletas Cadastradas
         bicicletaArrayList = new ArrayList<>();
         database.child("bicicleta").addValueEventListener(new ValueEventListener() {
@@ -48,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
                     bicicletaArrayList.add(b);
                 }
                     mAdapter = new BikeAdapter(getApplicationContext(),bicicletaArrayList);
-                    recyclerView.setAdapter(mAdapter);
+                    listView.setAdapter(mAdapter);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -62,7 +61,4 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public Context getActivity(){
-        return  this;
-    }
 }
