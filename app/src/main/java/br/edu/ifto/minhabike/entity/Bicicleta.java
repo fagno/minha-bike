@@ -7,17 +7,27 @@ public class Bicicleta {
     private String tipo;
     private float peso;
     private String notas;
+    private String nome;
 
     public Bicicleta() {
     }
 
-    public Bicicleta(int id, String modelo, String marca, String tipo, float peso, String notas) {
+    public Bicicleta(int id, String modelo, String marca, String tipo, float peso, String notas, String nome) {
         this.id = id;
         this.modelo = modelo;
         this.marca = marca;
         this.tipo = tipo;
         this.peso = peso;
         this.notas = notas;
+        this.nome = nome;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public int getId() {

@@ -28,7 +28,7 @@ public class BikeCadastroActivity extends AppCompatActivity {
 
     //Cadastro da Bicicleta
     TextView modelo;
-    EditText peso, notas;
+    EditText peso, notas, nomeBike;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,12 +37,13 @@ public class BikeCadastroActivity extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setTitle("Cadastrar Bicicleta");
 
+        //Atribuindo ID do cadastro
         tiposBikes = findViewById(R.id.spinnerTipoBike);
         marcasBike  = findViewById(R.id.spinnerMarcaBike);
-        //Atribuindo ID do cadastro
         modelo = findViewById(R.id.idBikeModelo);
         peso = findViewById(R.id.idBikePeso);
         notas = findViewById(R.id.editTextTextMultiLine);
+        nomeBike = findViewById(R.id.editNomeBike);
 
         final List<String> tipos = new ArrayList<>();
         tipos.add("Bicicleta BMX");
@@ -100,6 +101,7 @@ public class BikeCadastroActivity extends AppCompatActivity {
         bicicleta.setTipo(tiposBikes.getSelectedItem().toString());
         bicicleta.setPeso(Float.valueOf(peso.getText().toString()));
         bicicleta.setNotas(notas.getText().toString());
+        bicicleta.setNome(nomeBike.getText().toString());
 
         DatabaseReference bikes = database.child("bicicleta");
         bikes.push().setValue(bicicleta);
