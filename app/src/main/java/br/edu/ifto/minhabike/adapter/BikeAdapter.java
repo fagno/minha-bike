@@ -72,6 +72,7 @@ public class BikeAdapter extends BaseAdapter {
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), ServicoCadastroActivity.class);
                 intent.putExtra("modeloBike", bike.getModelo());
+                intent.putExtra("nomeBike", bike.getNome());
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 view.getContext().startActivity(intent);
             }

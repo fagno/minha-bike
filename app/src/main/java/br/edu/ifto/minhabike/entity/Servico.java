@@ -6,6 +6,7 @@ import java.time.LocalDate;
 
 public class Servico {
 
+    private String bikeNome;
     private String bikeServico;
     private String tipo;
     private String descricao;
@@ -16,9 +17,10 @@ public class Servico {
     public Servico() {
     }
 
-    public Servico(String bikeServico ,String tipo,  String descricao,
+    public Servico(String bikeNome,String bikeServico, String tipo, String descricao,
                    String kmAtual, String data, String valor) {
-        this.bikeServico =bikeServico;
+        this.bikeNome = bikeNome;
+        this.bikeServico = bikeServico;
         this.tipo = tipo;
         this.descricao = descricao;
         this.kmAtual = kmAtual;
@@ -26,9 +28,22 @@ public class Servico {
         this.valor = valor;
     }
 
-    public String getBikeServico() { return bikeServico; }
 
-    public void setBikeServico(String bikeServico) { this.bikeServico = bikeServico; }
+    public String getBikeNome() {
+        return bikeNome;
+    }
+
+    public void setBikeNome(String bikeNome) {
+        this.bikeNome = bikeNome;
+    }
+
+    public String getBikeServico() {
+        return bikeServico;
+    }
+
+    public void setBikeServico(String bikeServico) {
+        this.bikeServico = bikeServico;
+    }
 
     public String getTipo() {
         return tipo;

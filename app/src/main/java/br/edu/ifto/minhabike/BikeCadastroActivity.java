@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,14 +32,15 @@ public class BikeCadastroActivity extends AppCompatActivity {
 
     DatabaseReference database = FirebaseDatabase.getInstance().getReference();
 
-    Spinner tiposBikes,marcasBike;
+    Spinner tiposBikes, marcasBike;
     ArrayAdapter adapter;
 
     ArrayList<String> marcas;
     ArrayList<String> tipos;
     //Cadastro da Bicicleta
     TextView modelo;
-    EditText peso, notas,nomeBike;
+    EditText peso, notas, nomeBike;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +50,7 @@ public class BikeCadastroActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Cadastrar Bicicleta");
 
         tiposBikes = findViewById(R.id.spinnerTipoBike);
-        marcasBike  = findViewById(R.id.spinnerMarcaBike);
+        marcasBike = findViewById(R.id.spinnerMarcaBike);
         //Atribuindo ID do cadastro
         modelo = findViewById(R.id.idBikeModelo);
         peso = findViewById(R.id.idBikePeso);
@@ -62,14 +64,15 @@ public class BikeCadastroActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 marcas.clear();
-                for (DataSnapshot dado : dataSnapshot.getChildren()){
-                    Marcas b =dado.getValue(Marcas.class);
+                for (DataSnapshot dado : dataSnapshot.getChildren()) {
+                    Marcas b = dado.getValue(Marcas.class);
                     marcas.add(b.getNome());
                 }
-                adapter = new ArrayAdapter(getApplicationContext(),R.layout.spinner_item, marcas);
+                adapter = new ArrayAdapter(getApplicationContext(), R.layout.spinner_item, marcas);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
                 marcasBike.setAdapter(adapter);
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -83,14 +86,15 @@ public class BikeCadastroActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 tipos.clear();
-                for (DataSnapshot dado : dataSnapshot.getChildren()){
+                for (DataSnapshot dado : dataSnapshot.getChildren()) {
                     Tipo b = dado.getValue(Tipo.class);
                     tipos.add(b.getTipo());
                 }
-                adapter = new ArrayAdapter(getApplicationContext(),R.layout.spinner_item, tipos);
+                adapter = new ArrayAdapter(getApplicationContext(), R.layout.spinner_item, tipos);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
                 tiposBikes.setAdapter(adapter);
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -111,24 +115,35 @@ public class BikeCadastroActivity extends AppCompatActivity {
     }
 
     public void cadastarBicicleta(View view) {
+        final Bicicleta bicicleta = new Bicicleta();
+        bicicleta.setMarca(marcasBike.getSelectedItem().toString());
+        bicicleta.setModelo(modelo.getText().toString());
+        bicicleta.setTipo(tiposBikes.getSelectedItem().toString());
+        bicicleta.setPeso(Float.valueOf(peso.getText().toString()));
+        bicicleta.setNotas(notas.getText().toString());
+        bicicleta.setNome(nomeBike.getText().toString());
 
-        AlertDialog.Builder builder1 = new AlertDialog.Builder(getApplicationContext());
-        builder1.setMessage("Preencha Todos os Campos !!!");
-        AlertDialog alert11 = builder1.create();
-        alert11.show();
+        Query nomeBike = database.child("bicicleta").orderByChild("nome").equalTo(bicicleta.getNome());
+        nomeBike.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    //se cair aqui, significa que encontrou um nick igual
+                    Toast.makeText(BikeCadastroActivity.this,
+                            "Esse nome já  existe, escolha outro por favor !",
+                            Toast.LENGTH_LONG).show();
+                }else{
+                    DatabaseReference bikes = database.child("bicicleta");
+                    bikes.setValue(bicicleta);
 
-//        Bicicleta bicicleta = new Bicicleta();
-//        bicicleta.setMarca(marcasBike.getSelectedItem().toString());
-//        bicicleta.setModelo(modelo.getText().toString());
-//        bicicleta.setTipo(tiposBikes.getSelectedItem().toString());
-//        bicicleta.setPeso(Float.valueOf(peso.getText().toString()));
-//        bicicleta.setNotas(notas.getText().toString());
-//
-//        DatabaseReference bikes = database.child("bicicleta");
-//        bikes.push().setValue(bicicleta);
-//
-//        Intent intent = new Intent(this,MainActivity.class);
-//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//        startActivity(intent);
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
     }
 }
