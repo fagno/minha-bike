@@ -5,13 +5,13 @@ public class Bicicleta {
     private String modelo;
     private String marca;
     private String tipo;
-    private float peso;
+    private String peso;
     private String notas;
 
     public Bicicleta() {
     }
 
-    public Bicicleta( String nome, String modelo, String marca, String tipo, float peso, String notas) {
+    public Bicicleta( String nome, String modelo, String marca, String tipo, String peso, String notas) {
         this.nome = nome;
         this.modelo = modelo;
         this.marca = marca;
@@ -48,11 +48,11 @@ public class Bicicleta {
         this.tipo = tipo;
     }
 
-    public float getPeso() {
+    public String getPeso() {
         return peso;
     }
 
-    public void setPeso(float peso) {
+    public void setPeso(String peso) {
         this.peso = peso;
     }
 

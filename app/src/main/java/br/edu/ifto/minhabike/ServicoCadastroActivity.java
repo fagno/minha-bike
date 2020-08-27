@@ -31,6 +31,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ServicoCadastroActivity extends AppCompatActivity {
 
@@ -41,14 +42,13 @@ public class ServicoCadastroActivity extends AppCompatActivity {
     EditText valor,descricao;
     TextInputEditText km;
     Button cadastro,atualizar;
-    String nomeBike,data;
+    String nomeBike,data,uid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_servico_cadastro);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setTitle("Cadastro de Serviço");
 
         Intent intent =getIntent();
         servico = findViewById(R.id.spinnerTipoServico);
@@ -61,6 +61,7 @@ public class ServicoCadastroActivity extends AppCompatActivity {
         bikeServico.setText(intent.getStringExtra("modeloBike"));
         nomeBike = intent.getStringExtra("nomeBike");
         data = intent.getStringExtra("servicoData");
+        uid = intent.getStringExtra("uidServico");
 
 
     if(intent.getStringExtra("servicoBike")!=null){
@@ -69,8 +70,11 @@ public class ServicoCadastroActivity extends AppCompatActivity {
         descricao.setText(intent.getStringExtra("servicoDescricao"));
         valor.setText(intent.getStringExtra("servicoValor"));
         bikeServico.setText(intent.getStringExtra("servicoBike"));
+        getSupportActionBar().setTitle("Atualizar  Serviço");
         cadastro.setVisibility(View.GONE);
         atualizar.setVisibility(View.VISIBLE);
+    }else {
+        getSupportActionBar().setTitle("Cadastro de Serviço");
     }
 
 
@@ -88,7 +92,7 @@ public class ServicoCadastroActivity extends AppCompatActivity {
     public void cadastarServico(View view) {
         LocalDate agora = LocalDate.now();
         DateTimeFormatter formatterData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
+        DatabaseReference servicos = database.child("servico");
         Servico s = new Servico();
         s.setBikeServico(bikeServico.getText().toString());
         s.setTipo(servico.getSelectedItem().toString());
@@ -97,9 +101,10 @@ public class ServicoCadastroActivity extends AppCompatActivity {
         s.setKmAtual(km.getText().toString());
         s.setBikeNome(nomeBike);
         s.setValor(valor.getText().toString());
+        s.setUid(servicos.push().getKey());
 
-        DatabaseReference servicos = database.child("servico");
-        servicos.push().setValue(s);
+
+        servicos.child(s.getUid()).setValue(s);
 
         Intent intent = new Intent(this,MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -108,23 +113,28 @@ public class ServicoCadastroActivity extends AppCompatActivity {
     }
 
     public void acaoAtualizar(View view) {
+
         final Servico s = new Servico();
+        s.setBikeNome(nomeBike);
         s.setBikeServico(bikeServico.getText().toString());
         s.setTipo(servico.getSelectedItem().toString());
         s.setData(data);
         s.setDescricao(descricao.getText().toString());
         s.setKmAtual(km.getText().toString());
-        s.setValor("R$ "+valor.getText().toString());
+        s.setValor(valor.getText().toString());
+        s.setUid(uid);
 
-
-        final Query query = database.child("servico").orderByChild("nomeBike").equalTo(nomeBike).limitToFirst(1);
+        final Query query = database.child("servico").orderByChild("nomeBike").equalTo(nomeBike);
         query.getRef().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                for (DataSnapshot ex : dataSnapshot.getChildren()) {
-                    Toast.makeText(getApplicationContext(), ex.getKey(), Toast.LENGTH_LONG).show();
-                }
+//                for (DataSnapshot ex : dataSnapshot.getChildren()) {
+                    Toast.makeText(getApplicationContext(),"Servico Atualizado !!!", Toast.LENGTH_LONG).show();
+                    database.child("servico").child(s.getUid()).setValue(s);
+
+//                }
+
             }
 
             @Override
@@ -132,10 +142,7 @@ public class ServicoCadastroActivity extends AppCompatActivity {
 
             }
         });
-
-        Intent intent = new Intent(this,MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
+        finish();
     }
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

@@ -70,15 +70,16 @@ public class ServicosAdapter extends RecyclerView.Adapter<ServicosAdapter.MyView
         holder.imgEditar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(view.getContext(), ServicoCadastroActivity.class);
-//                intent.putExtra("servicoBike",servicosArrayList.get(position).getBikeServico());
-//                intent.putExtra("servicoData",servicosArrayList.get(position).getData());
-//                intent.putExtra("servicoDescricao",servicosArrayList.get(position).getDescricao());
-//                intent.putExtra("servicoKm",servicosArrayList.get(position).getKmAtual());
-//                intent.putExtra("servicoValor",servicosArrayList.get(position).getValor());
-//                intent.putExtra("nomeBike",servicosArrayList.get(position).getBikeNome());
-//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                view.getContext().startActivity(intent);
+                Intent intent = new Intent(view.getContext(), ServicoCadastroActivity.class);
+                intent.putExtra("servicoBike",servicosArrayList.get(position).getBikeServico());
+                intent.putExtra("servicoData",servicosArrayList.get(position).getData());
+                intent.putExtra("servicoDescricao",servicosArrayList.get(position).getDescricao());
+                intent.putExtra("servicoKm",servicosArrayList.get(position).getKmAtual());
+                intent.putExtra("servicoValor",servicosArrayList.get(position).getValor());
+                intent.putExtra("nomeBike",servicosArrayList.get(position).getBikeNome());
+                intent.putExtra("uidServico",servicosArrayList.get(position).getUid());
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                view.getContext().startActivity(intent);
 
             }
         });

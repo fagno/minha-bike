@@ -9,11 +9,14 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,6 +29,7 @@ import java.util.List;
 
 import br.edu.ifto.minhabike.entity.Bicicleta;
 import br.edu.ifto.minhabike.entity.Marcas;
+import br.edu.ifto.minhabike.entity.Servico;
 import br.edu.ifto.minhabike.entity.Tipo;
 
 public class BikeCadastroActivity extends AppCompatActivity {
@@ -38,8 +42,12 @@ public class BikeCadastroActivity extends AppCompatActivity {
     ArrayList<String> marcas;
     ArrayList<String> tipos;
     //Cadastro da Bicicleta
-    TextView modelo;
+    TextView txtNBike;
     EditText peso, notas, nomeBike;
+    TextInputEditText modelo;
+    LinearLayout linearLayout;
+    Button salvar, editar;
+    String nBike;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +55,8 @@ public class BikeCadastroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_bike_cadastro);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setTitle("Cadastrar Bicicleta");
 
+        Intent intent = getIntent();
         tiposBikes = findViewById(R.id.spinnerTipoBike);
         marcasBike = findViewById(R.id.spinnerMarcaBike);
         //Atribuindo ID do cadastro
@@ -56,6 +64,26 @@ public class BikeCadastroActivity extends AppCompatActivity {
         peso = findViewById(R.id.idBikePeso);
         notas = findViewById(R.id.editTextTextMultiLine);
         nomeBike = findViewById(R.id.editNomeBike);
+        txtNBike = findViewById(R.id.idNomeBikeAtt);
+        linearLayout = findViewById(R.id.idllEditar);
+        salvar = findViewById(R.id.btnSalvarBike);
+        editar = findViewById(R.id.btnEditarBike);
+
+        if (intent.getStringExtra("bNome") != null) {
+            nBike = intent.getStringExtra("bNome");
+            txtNBike.setText(intent.getStringExtra("bNome"));
+            modelo.setText(intent.getStringExtra("bModelo"));
+            peso.setText(intent.getStringExtra("bPeso"));
+            notas.setText(intent.getStringExtra("bNotas"));
+            getSupportActionBar().setTitle("Editar Bicicleta");
+            nomeBike.setVisibility(View.GONE);
+            linearLayout.setVisibility(View.VISIBLE);
+            salvar.setVisibility(View.GONE);
+            editar.setVisibility(View.VISIBLE);
+        } else {
+            getSupportActionBar().setTitle("Cadastrar Bicicleta");
+        }
+
 
 //        Buscando Lista de Marcas no FireBase
         marcas = new ArrayList<String>();
@@ -119,7 +147,7 @@ public class BikeCadastroActivity extends AppCompatActivity {
         bicicleta.setMarca(marcasBike.getSelectedItem().toString());
         bicicleta.setModelo(modelo.getText().toString());
         bicicleta.setTipo(tiposBikes.getSelectedItem().toString());
-        bicicleta.setPeso(Float.valueOf(peso.getText().toString()));
+        bicicleta.setPeso(peso.getText().toString());
         bicicleta.setNotas(notas.getText().toString());
         bicicleta.setNome(nomeBike.getText().toString());
 
@@ -132,8 +160,8 @@ public class BikeCadastroActivity extends AppCompatActivity {
                     Toast.makeText(BikeCadastroActivity.this,
                             "Esse nome já  existe, escolha outro por favor !",
                             Toast.LENGTH_LONG).show();
-                }else{
-                    DatabaseReference bikes = database.child("bicicleta");
+                } else {
+                    DatabaseReference bikes = database.child("bicicleta").child(bicicleta.getNome());
                     bikes.setValue(bicicleta);
 
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
@@ -141,9 +169,40 @@ public class BikeCadastroActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
+    }
+
+    public void acaoEditar(View view) {
+        final Bicicleta b = new Bicicleta();
+        b.setNome(nBike);
+        b.setModelo(modelo.getText().toString());
+        b.setMarca(marcasBike.getSelectedItem().toString());
+        b.setTipo(tiposBikes.getSelectedItem().toString());
+        b.setPeso(peso.getText().toString());
+        b.setNotas(notas.getText().toString());
+
+        Query query = database.child("bicicleta").orderByChild("nome").equalTo(b.getNome());
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+//                for (DataSnapshot ex : dataSnapshot.getChildren()) {
+                Toast.makeText(BikeCadastroActivity.this, "Dados Editados", Toast.LENGTH_LONG).show();
+                database.child("bicicleta").child(nBike).setValue(b);
+//                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 }

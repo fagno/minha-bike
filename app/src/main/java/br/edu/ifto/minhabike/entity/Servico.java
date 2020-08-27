@@ -13,12 +13,13 @@ public class Servico {
     private String kmAtual;
     private String data;
     private String valor;
+    private String uid;
 
     public Servico() {
     }
 
     public Servico(String bikeNome,String bikeServico, String tipo, String descricao,
-                   String kmAtual, String data, String valor) {
+                   String kmAtual, String data, String valor, String uid) {
         this.bikeNome = bikeNome;
         this.bikeServico = bikeServico;
         this.tipo = tipo;
@@ -26,6 +27,7 @@ public class Servico {
         this.kmAtual = kmAtual;
         this.data = data;
         this.valor = valor;
+        this.uid = uid;
     }
 
 
@@ -85,5 +87,7 @@ public class Servico {
         this.valor = valor;
     }
 
+    public String getUid() { return uid;}
 
+    public void setUid(String uid) {this.uid = uid;}
 }
