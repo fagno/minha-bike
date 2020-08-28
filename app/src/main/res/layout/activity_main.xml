@@ -1,38 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+
     tools:context=".MainActivity">
 
-    <ListView
-        android:id="@+id/ltViewMain"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@color/backgoundApp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
 
-    </ListView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="190dp"
+        >
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="16dp"
-        android:clickable="false"
-        android:onClick="acaoAddBike"
-        android:tint="#FFFDFD"
-        app:backgroundTint="#BD350C"
-        app:fabSize="mini"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/bike" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:rowCount="2"
+            android:columnCount="2"
+            android:layout_margin="5dp"
+            android:alignmentMode="alignMargins"
+            android:layout_gravity="center_horizontal"
+            android:columnOrderPreserved="false">
+
+
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="5dp"
+                android:layout_margin="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:background="@color/backgoundApp2"
+                    >
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginTop="18dp"
+                        android:src="@drawable/servicos"
+                        />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Lista de Bikes Cadastradas"
+                        android:onClick="acaoListaBike"
+                        android:textSize="18sp"
+                        android:background="@color/backgoundApp2"
+                        android:layout_marginTop="20dp"/>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="5dp"
+                android:layout_margin="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:background="@color/backgoundApp5"
+                    >
+
+                    <ImageView
+                        android:layout_width="39dp"
+                        android:layout_height="24dp"
+                        android:layout_marginTop="18dp"
+                        android:src="@drawable/bike" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="acaoAddBike"
+                        android:text="Cadastrar bike"
+                        android:textSize="18sp"
+                        android:background="@color/backgoundApp5"
+                        android:layout_marginTop="20dp"/>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+        </GridLayout>
+
+
+
+    </LinearLayout>
+
+
+
+</ScrollView>
+
+
+

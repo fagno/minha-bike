@@ -9,10 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".BikeActivity"></activity>
+        <activity android:name=".ListaBike"></activity>
+        <activity android:name=".BikeActivity" />
         <activity android:name=".ConsultaServicoActivity" />
         <activity android:name=".CadastroUsuarioActivity" />
-        <activity android:name=".UsuarioActivity"></activity>
+        <activity android:name=".UsuarioActivity" />
         <activity android:name=".ServicoCadastroActivity" />
         <activity android:name=".BikeCadastroActivity" />
         <activity android:name=".MainActivity">
