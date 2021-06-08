@@ -1,7 +1,7 @@
 # minha-bike
-Projeto da Disciplina de Programação para Dispositivos Móveis I
+Projeto iniciado através da Disciplina de Programação para Dispositivos Móveis I
 
-O presente projeto tem como objetivo desenvolver um aplicativo para controlar e monitorar manutenções preventivas e custo com sua bike, com o objetivo de reduzir ou impedir falhas no desempenho da mesma.
+O presente projeto tem como objetivo desenvolver um aplicativo para controlar e monitorar manutenções preventivas e custo com sua bike, sincronizando informações com o aplicativo Strava. 
 
 ## Adicionar o arquivo de configuração do Firebase - [Adicionar o Firebase ao projeto para Android](https://firebase.google.com/docs/android/setup?authuser=0)
 
